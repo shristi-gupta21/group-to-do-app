@@ -1,5 +1,7 @@
+import { ToDoDetails } from "./components/ToDoDetails";
+
 function App() {
-  return <div>React JS Application</div>;
+  return <ToDoDetails />;
 }
 
 export default App;

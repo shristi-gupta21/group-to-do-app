@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
+import { Group } from "./Group";
 
 export const ToDoDetails = () => {
   const [data, setData] = useState([]);
@@ -21,5 +22,10 @@ export const ToDoDetails = () => {
   }, []);
 
   let filteredData = data.filter((item) => item.id < 11);
-  return <div>{JSON.stringify(filteredData)}</div>;
+  return (
+    <>
+      {/* {JSON.stringify(filteredData)} */}
+      <Group />
+    </>
+  );
 };

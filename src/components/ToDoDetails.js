@@ -22,10 +22,5 @@ export const ToDoDetails = () => {
   }, []);
 
   let filteredData = data.filter((item) => item.id < 11);
-  return (
-    <>
-      {/* {JSON.stringify(filteredData)} */}
-      <Group />
-    </>
-  );
+  return filteredData;
 };

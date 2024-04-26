@@ -11,7 +11,6 @@ export const groupSlice = createSlice({
       state.value.push(newGroup);
     },
     deleteGroup: (state, action) => {
-      console.log(action.payload);
       state.value.splice(action.payload, 1);
     },
   },

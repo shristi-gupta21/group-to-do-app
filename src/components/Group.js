@@ -2,7 +2,7 @@ import React, { useId, useState } from "react";
 import { MdDelete } from "react-icons/md";
 import { FaLongArrowAltRight } from "react-icons/fa";
 
-export const Group = () => {
+export const Group = ({ index }) => {
   const [startValue, setStartValue] = useState();
   const [endValue, setEndValue] = useState();
   const id = useId();
@@ -17,14 +17,11 @@ export const Group = () => {
     setEndValue(numericValue);
   };
   return (
-    <div
-      key={id}
-      className="mx-auto flex justify-center items-center my-10 gap-4"
-    >
+    <div key={id} className="flex items-center gap-4">
       <MdDelete className=" text-2xl" />
       <div className=" border rounded flex">
         <div className="border-r px-3 py-2 bg-gray-100">
-          <span>Group 1</span>
+          <span>Group {index}</span>
         </div>
         <div className="border-r px-3 py-2 ">
           <input

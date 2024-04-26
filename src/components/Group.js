@@ -2,7 +2,7 @@ import React, { useId, useState } from "react";
 import { MdDelete } from "react-icons/md";
 import { FaLongArrowAltRight } from "react-icons/fa";
 
-export const Group = ({ index }) => {
+export const Group = ({ index, group }) => {
   const [startValue, setStartValue] = useState();
   const [endValue, setEndValue] = useState();
   const id = useId();
@@ -16,6 +16,7 @@ export const Group = ({ index }) => {
     let numericValue = inputVal.replace(/\D/g, "");
     setEndValue(numericValue);
   };
+  console.log(group);
   return (
     <div key={id} className="flex items-center gap-4">
       <MdDelete className=" text-2xl" />

@@ -7,8 +7,8 @@ import { Result } from "./Result";
 
 export const Group = ({ index }) => {
   const dispatch = useDispatch();
-  const [startValue, setStartValue] = useState();
-  const [endValue, setEndValue] = useState();
+  const [startValue, setStartValue] = useState(1);
+  const [endValue, setEndValue] = useState(10);
   const id = useId();
   const handleStartValueChange = (e) => {
     let inputVal = e.target.value;

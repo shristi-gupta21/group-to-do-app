@@ -1,22 +1,34 @@
-import React from "react";
-import { useSelector } from "react-redux";
-
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { validation } from "../features/validationSlice";
 export const Result = ({ index, start, end }) => {
-  const { value, loading, error } = useSelector((state) => state?.data);
-  //   console.log("result", value, loading, error);
-  console.log(value);
-  let newArr = value?.filter(
-    (item, index) => item.id >= start && item.id <= end
-  );
-  console.log(newArr);
+  const dispatch = useDispatch();
+  const { value, loading } = useSelector((state) => state?.data);
+  const error = useSelector((state) => state.valid.value);
+  useEffect(() => {
+    let newObj = {
+      start: start,
+      end: end,
+      index: index,
+      data: value?.filter((item) => item.id >= start && item.id <= end),
+      error: error.length,
+    };
+    setRange((prev) => [...prev, newObj]);
+  }, [start, end]);
+
+  let data = value?.filter((item) => item.id >= start && item.id <= end);
   return (
-    <div key={index} className=" w-96 border bg-gray-50 h-10 py-3 px-4">
-      {loading && <p>Loading..</p>}
-      {newArr.map((item) => (
-        <span>
-          ({item.id}) {item.completed ? "true " : "false "}
-        </span>
-      ))}
+    <div key={index} className=" w-96 border bg-gray-50 min-h-10 py-3 px-4">
+      {data.map((item) =>
+        item.error === 0 ? (
+          <span key={crypto.randomUUID()}>
+            {loading && <p>Loading..</p>}({item.id})
+            {item.completed ? "true " : "false "}
+          </span>
+        ) : (
+          ""
+        )
+      )}
     </div>
   );
 };

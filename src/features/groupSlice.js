@@ -6,12 +6,16 @@ export const groupSlice = createSlice({
     value: [],
   },
   reducers: {
-    createGroup: (state, action) => {
+    createGroup: (state) => {
       let newGroup = { id: crypto.randomUUID() };
       state.value.push(newGroup);
+    },
+    deleteGroup: (state, action) => {
+      console.log(action.payload);
+      state.value.splice(action.payload, 1);
     },
   },
 });
 
-export const { createGroup } = groupSlice.actions;
+export const { createGroup, deleteGroup } = groupSlice.actions;
 export default groupSlice.reducer;

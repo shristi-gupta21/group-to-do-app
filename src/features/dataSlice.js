@@ -10,17 +10,14 @@ export const dataSlice = createSlice({
   },
   reducers: {
     fetchDataStart: (state) => {
-      console.log(state);
       state.loading = true;
       state.error = null;
     },
     fetchDataSuccess: (state, action) => {
-      console.log("fetchDataSuccess", state);
       state.loading = false;
       state.value = action.payload;
     },
     fetchDataFailure: (state, action) => {
-      console.log("fetchDataFailure", state);
       state.loading = false;
       state.error = action.payload;
     },

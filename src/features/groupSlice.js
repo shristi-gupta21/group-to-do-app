@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const groupSlice = createSlice({
   name: "group",
   initialState: {
-    value: [],
+    value: [{ id: crypto.randomUUID() }],
   },
   reducers: {
     createGroup: (state) => {

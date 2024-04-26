@@ -54,7 +54,7 @@ export const Group = ({ index }) => {
           </div>
         </div>
       </div>
-      <Result />
+      <Result index={index} start={startValue} end={endValue} />
     </div>
   );
 };

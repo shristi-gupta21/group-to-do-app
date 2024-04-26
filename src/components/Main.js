@@ -3,6 +3,7 @@ import { Group } from "./Group";
 import { IoIosAdd } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { createGroup } from "../features/groupSlice";
+import { fetchDataAction } from "../features/dataSlice";
 
 export const Main = () => {
   const dispatch = useDispatch();
@@ -10,19 +11,28 @@ export const Main = () => {
   let handleClick = () => {
     dispatch(createGroup());
   };
-  return (
-    <div className="mx-auto flex flex-col items-center my-10 gap-5">
-      {group.map((item, index) => (
-        <Group key={item.id} index={index + 1} />
-      ))}
+  const { value, loading, error } = useSelector((state) => state.data);
+  console.log(value, loading, error);
 
-      <button
-        className="border  px-2 py-1 rounded flex items-center text-sm"
-        onClick={handleClick}
-      >
-        <IoIosAdd className=" text-blue-600 text-xl" />
-        Add Group
-      </button>
-    </div>
+  const handleShowResults = () => {
+    dispatch(fetchDataAction());
+  };
+  return (
+    <>
+      <div className="mx-auto flex flex-col items-center my-10 gap-5">
+        {group.map((item, index) => (
+          <Group key={item.id} index={index + 1} />
+        ))}
+
+        <button
+          className="border  px-2 py-1 rounded flex items-center text-sm"
+          onClick={handleClick}
+        >
+          <IoIosAdd className=" text-blue-600 text-xl" />
+          Add Group
+        </button>
+        <button onClick={handleShowResults}>Show Results</button>
+      </div>
+    </>
   );
 };

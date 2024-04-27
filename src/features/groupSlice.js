@@ -28,7 +28,7 @@ export const groupSlice = createSlice({
         state.error = "Group range must be within 1 to 10.";
       } else {
         state.value.push(newGroup);
-        state.error = ""; // Clear error if add was successful
+        state.error = "";
       }
     },
     deleteGroup: (state, action) => {
@@ -37,7 +37,8 @@ export const groupSlice = createSlice({
     updateGroup: (state, action) => {
       const { groupId, from, to } = action.payload;
       if (from < 1 || to > 10 || from > to) {
-        state.error = "Invalid group range. Please enter a valid range.";
+        state.error =
+          "Invalid group range. Group range must be within 1 to 10.";
         return;
       }
       const updatedGroups = state.value.map((group) =>

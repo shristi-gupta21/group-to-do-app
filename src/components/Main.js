@@ -24,6 +24,7 @@ export const Main = () => {
   return (
     <>
       <div className="mx-auto flex flex-col items-center my-10 gap-5">
+        <p>Tip: You need to update start and end value every time. </p>
         {groups.map((group, index) => (
           <div key={group.id} className=" flex gap-4 items-center">
             <Group group={group} index={index + 1} />
@@ -32,6 +33,7 @@ export const Main = () => {
             )}
           </div>
         ))}
+        {errorGroup && <p className="text-red-500 font-medium">{errorGroup}</p>}
         <button
           onClick={handleAddClick}
           className="disabled:opacity-50 disabled:cursor-not-allowed border px-2 py-1 rounded flex items-center text-sm"
@@ -47,7 +49,6 @@ export const Main = () => {
           Show Results
         </button>
         {loading && <p>Loading...</p>}
-        {errorGroup && <p className="text-red-500">{errorGroup}</p>}
       </div>
       ;
     </>

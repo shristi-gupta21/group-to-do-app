@@ -1,60 +1,67 @@
-import React, { useId, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { MdDelete } from "react-icons/md";
 import { FaLongArrowAltRight } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { deleteGroup } from "../features/groupSlice";
-import { Result } from "./Result";
 
-export const Group = ({ index }) => {
+export const Group = ({ group, onUpdate }) => {
   const dispatch = useDispatch();
-  const [startValue, setStartValue] = useState(1);
-  const [endValue, setEndValue] = useState(10);
-  const id = useId();
+  const [from, setFrom] = useState(group.from);
+  const [to, setTo] = useState(group.to);
+
+  useEffect(() => {
+    onUpdate(group.id, from, to);
+  }, [from, to, group.id, onUpdate]);
+
   const handleStartValueChange = (e) => {
-    let inputVal = e.target.value;
-    let numericValue = inputVal.replace(/\D/g, "");
-    setStartValue(numericValue);
+    const inputVal = e.target.value;
+    const numericValue = inputVal === "" ? "" : parseInt(inputVal, 10);
+    if (!isNaN(numericValue)) {
+      setFrom(numericValue);
+    }
   };
+
   const handleEndValueChange = (e) => {
-    let inputVal = e.target.value;
-    let numericValue = inputVal.replace(/\D/g, "");
-    setEndValue(numericValue);
+    const inputVal = e.target.value;
+    const numericValue = inputVal === "" ? "" : parseInt(inputVal, 10);
+    if (!isNaN(numericValue)) {
+      setTo(numericValue);
+    }
+  };
+
+  const handleDelete = () => {
+    dispatch(deleteGroup(group.id));
   };
 
   return (
-    <div key={id} className="flex items-center gap-x-6">
+    <div key={group.id} className="flex items-center gap-x-6">
       <div className="flex items-center gap-4">
-        <button onClick={() => dispatch(deleteGroup(id))}>
-          <MdDelete className=" text-2xl" />
+        <button onClick={handleDelete}>
+          <MdDelete className="text-2xl" />
         </button>
-        <div className=" border rounded flex">
+        <div className="border rounded flex">
           <div className="border-r px-3 py-2 bg-gray-100">
-            <span>Group {index}</span>
+            <span>Group {group.index}</span>
           </div>
-          <div className="border-r px-3 py-2 ">
-            <input
-              type="text"
-              className="w-10 focus:outline-none"
-              value={startValue}
-              onChange={handleStartValueChange}
-              maxLength={2}
-            />
-          </div>
+          <input
+            type="number"
+            value={from}
+            onChange={handleStartValueChange}
+            min="1"
+            max="10"
+          />
           <div className="border-r px-3 py-2 bg-gray-100">
             <FaLongArrowAltRight />
           </div>
-          <div className="px-3 py-2 ">
-            <input
-              type="text"
-              className="w-10 focus:outline-none"
-              value={endValue}
-              onChange={handleEndValueChange}
-              maxLength={2}
-            />
-          </div>
+          <input
+            type="number"
+            value={to}
+            onChange={handleEndValueChange}
+            min="1"
+            max="10"
+          />
         </div>
       </div>
-      <Result index={index} start={startValue} end={endValue} />
     </div>
   );
 };
